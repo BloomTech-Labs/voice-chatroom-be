@@ -19,7 +19,7 @@ const server = new ApolloServer({
   resolvers,
   context: ({req}) => {
     const accessToken = req.headers.authorization || "";
-    // const idToken = ;
+    //adding a change
     const user = client.getUser(idToken)
     .then (user => {
       console.log(user);
