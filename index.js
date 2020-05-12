@@ -1,4 +1,5 @@
-require('dotenv').config()
+require('dotenv').config();
+const {oktaJwtVerifier, client} = require('./auth/auth');
 const cors = require("cors")
 const express = require("express")
 const { ApolloServer } = require ('apollo-server-express');
@@ -16,9 +17,17 @@ app.use(cors());
 const server = new ApolloServer({
   typeDefs: schema,
   resolvers,
-  context: {
-    me: users[1],
-  },
+  context: ({req}) => {
+    const accessToken = req.headers.authorization || "";
+    // const idToken = ;
+    const user = client.getUser(idToken)
+    .then (user => {
+      console.log(user);
+    });
+    const verifyUser =  oktaJwtVerifier(user)
+
+    return {user};
+  }
 });
 
 server.applyMiddleware({ app, path: '/graphql' });
