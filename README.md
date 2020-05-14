@@ -18,9 +18,9 @@ To get the server running locally:
 🚫 adjust these scripts to match your project
 
 - Clone this repo
-- **yarn install** to install all required dependencies
-- **yarn server** to start the local server
-- **yarn test** to start server using testing environment
+- **npm install** to install all required dependencies
+- **npm start** to start the local server
+- **npm test** to start server using testing environment
 
 ### Backend framework goes here
 
@@ -35,7 +35,19 @@ To get the server running locally:
 
 🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
 
-#### Organization Routes
+### Test User Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| GET    | `/users`                | all users      | Returns an array of all users.               |
+| GET    | `/users/:Id`            | all users      | Returns information for a single user.       |  
+| PUT    | `/users/:Id`            | all users      | Modify an existing user.                     |
+| POST   | `/users/`               | all users      | Add a new User.                              |
+| DELETE | `/users/:Id`            | all users      | Delete a specified user.                     |
+
+
+
+<!-- #### Organization Routes
 
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
@@ -52,13 +64,27 @@ To get the server running locally:
 | GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
 | POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
 | PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| DELETE | `/users/:userId`        | owners, supervisors |                                                    | -->
 
 # Data Model
 
 🚫This is just an example. Replace this with your data model
 
-#### 2️⃣ ORGANIZATIONS
+### Test User Model
+
+---
+
+```
+{
+  id: increment
+  email: STRING
+  first_name: STRING
+  last_name: STRING
+  
+}
+```
+
+<!-- #### 2️⃣ ORGANIZATIONS
 
 ---
 
@@ -71,9 +97,9 @@ To get the server running locally:
   customer_id: STRING
   subscription_id: STRING
 }
-```
+``` -->
 
-#### USERS
+<!-- #### USERS
 
 ---
 
@@ -91,7 +117,7 @@ To get the server running locally:
   emailpref: BOOLEAN
   phonepref: BOOLEAN
 }
-```
+``` -->
 
 ## 2️⃣ Actions
 
