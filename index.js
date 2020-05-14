@@ -12,7 +12,7 @@ app.use(express.json());
 app.use("/", welcomeRouter)
 app.use("/users", userRouter)
 
-const PORT = process.env.PORT || 6900;
+const PORT = process.env.PORT || 6000;
 
 app.listen(PORT, () => {
   console.log(`Niceness on ${PORT}`);
