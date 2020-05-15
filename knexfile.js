@@ -1,71 +1,35 @@
-// Update with your config settings.
+require("dotenv").config();
 
-// Holding this for postgresql settings
-// module.exports = {
-
-//   development: {
-//     client: 'sqlite3',
-//     connection: {
-//       filename: './dev.sqlite3'
-//     }
-//   },
-
-//   staging: {
-//     client: 'postgresql',
-//     connection: {
-//       database: 'my_db',
-//       user:     'username',
-//       password: 'password'
-//     },
-//     pool: {
-//       min: 2,
-//       max: 10
-//     },
-//     migrations: {
-//       tableName: 'knex_migrations'
-//     }
-//   },
-
-//   production: {
-//     client: 'postgresql',
-//     connection: {
-//       database: 'my_db',
-//       user:     'username',
-//       password: 'password'
-//     },
-//     pool: {
-//       min: 2,
-//       max: 10
-//     },
-//     migrations: {
-//       tableName: 'knex_migrations'
-//     }
-//   }
-
-// };
-
-// Can be removed and cleaned up when set up with Postgresql, this is set to run
-// a resettable development test db
 module.exports = {
-
   development: {
-    client: 'sqlite3',
-    useNullAsDefault: true, // needed for sqlite
+    client: "pg",
     connection: {
-      filename: './data/users.db3',
+      host: "localhost",
+      user: "postgres",
+      password: "postgres",
+      database: "guide_me",
     },
     migrations: {
-      directory: './data/migrations'
+      directory: "./data/migrations",
     },
-    seeds: {
-      directory: './data/seeds'
+    seeds: { directory: "./data/seeds" },
+  },
+
+  testing: {
+    client: "pg",
+    connection: process.env.DB_URL,
+    migrations: {
+      directory: "./data/migrations",
     },
-    // add the following
-    pool: {
-      afterCreate: (conn, done) => {
-        // runs after a connection is made to the sqlite engine
-        conn.run('PRAGMA foreign_keys = ON', done); // turn on FK enforcement
-      },
+    seeds: { directory: "./data/seeds" },
+  },
+
+  production: {
+    client: "pg",
+    connection: process.env.DB_URL,
+    migrations: {
+      directory: "./data/migrations",
     },
-  }, 
+    seeds: { directory: "./data/seeds" },
+  },
 };
