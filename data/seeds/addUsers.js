@@ -7,7 +7,7 @@ exports.seed = async function (knex, promise) {
       return knex("users").insert([
         {
           id: 1,
-          email: "test@test.com",
+          email: "suptest@test.com",
           first_name: "Test",
           last_name: "MctestFace",
         },
