@@ -10,9 +10,12 @@ module.exports = {
     seeds: { directory: "./data/seeds" },
   },
 
-  testing: {
-    client: "pg",
-    connection: process.env.DB_URL,
+  test: {
+    client: "sqlite3",
+    useNullAsDefault: true,
+    connection: {
+      filename: './data/users.db3'
+    },
     migrations: {
       directory: "./data/migrations",
     },
