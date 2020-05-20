@@ -1,5 +1,5 @@
 const express = require('express');
-
+const userAuth =require('../auth/userAuth')
 const Users = require('./user-model');
 
 const router = express.Router({
@@ -7,7 +7,7 @@ const router = express.Router({
 });
 
 // GET all users
-router.get('/', (req, res) =>{
+router.get('/', userAuth, (req, res) =>{
     Users.find()
     .then(users =>{
         res.json(users);

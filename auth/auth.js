@@ -1,3 +1,4 @@
+require('dotenv').config()
 const okta = require("@okta/okta-sdk-nodejs");
 const OktaJwtVerifier = require("@okta/jwt-verifier");
 const oktaJwtVerifier = new OktaJwtVerifier({
