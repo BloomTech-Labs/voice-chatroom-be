@@ -8,20 +8,20 @@ exports.seed = async function (knex, promise) {
         {
           id: 1,
           email: "supetest@test.com",
-          first_name: "Test",
-          last_name: "MctestFace",
+          given_name: "Test",
+          family_name: "MctestFace",
         },
         {
           id: 2,
           email: "potato@potato.com",
-          first_name: "Joe",
-          last_name: "yeeterson",
+          given_name: "Joe",
+          family_name: "yeeterson",
         },
         {
           id: 3,
           email: "fbi@government.com",
-          first_name: "Agent",
-          last_name: "007",
+          given_name: "Agent",
+          family_name: "007",
         },
       ]);
     });
