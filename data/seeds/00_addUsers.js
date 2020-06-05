@@ -7,7 +7,7 @@ exports.seed = async function (knex, promise) {
       // Inserts seed entries
       return knex("users").insert([
         {
-          
+         
           email: "supetest@test.com",
           given_name: "Test",
           family_name: "MctestFace",
@@ -17,7 +17,7 @@ exports.seed = async function (knex, promise) {
           isMentor: true,
         },
         {
-          
+         
           email: "potato@potato.com",
           given_name: "Joe",
           family_name: "yeeterson",
@@ -28,7 +28,7 @@ exports.seed = async function (knex, promise) {
 
         },
         {
-         
+        
           email: "fbi@government.com",
           given_name: "Agent",
           family_name: "007",

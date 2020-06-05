@@ -113,20 +113,35 @@ router.put('/:id', (req, res) => {
   router.put('/:id/mentor', (req, res) => {
     const { id } = req.params;
   
-    Users.findById(id, (err, foundUser ) =>{
-      console.log(foundUser.isMentor);
-      if (err){
-        console.log(err);
-      } else if (foundUser.isMentor !==true) {
-        Users.update({_id: req.params.id}, {$set: {isMentor: true}});
+    // Users.findById(id, (err, foundUser ) =>{
+    //   console.log(foundUser.isMentor);
+    //   if (err){
+    //     console.log(err);
+    //   } else if (foundUser.isMentor !==true) {
+    //     Users.update(id , {$set: {isMentor: true}});
 
-      }
-      else {
-        Users.update({_id: req.params.id}, {$set: {isMentor: false}});
-      }
-      return(foundUser)
+    //   }
+    //   else {
+    //     Users.update(id, {$set: {isMentor: false}});
+    //   }
+    //   return(foundUser)
+    // });
+    //  //  Error handling needs to be reviewed
+
+    Users.findById(id)
+    .then(user =>{
+      if(user.isMentor !==true)
+      Users.makeMentor(id)
+    })
+    // Mentors.add(mentorData)
+    // .then(mentor => {
+    //   res.status(201).json(mentorData);
+    // })
+    .catch (err => {
+      res.status(500).json({
+           message: 'Failed to create new mentor'
+           });
     });
-     //  Error handling needs to be reviewed
      
   });
 

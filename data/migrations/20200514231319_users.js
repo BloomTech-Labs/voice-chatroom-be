@@ -29,10 +29,12 @@ exports.up = async function (knex, promise) {
     .unsigned()
     .primary()
 
-    tbl.string('mentor_id')
+    tbl.integer('mentor_id')
     .unsigned()
-    // .references('id')
-    // .inTable('users');
+    .references('id')
+    .inTable('users')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE');
 
     // user info to carry over?
     tbl.string('email')
@@ -55,6 +57,58 @@ exports.up = async function (knex, promise) {
    
   })
 
+  .createTable('mentor_categories', tbl =>{
+   
+    tbl.integer('mentor_id')
+    .references('id')
+    .inTable('mentors')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
+
+    tbl.integer('category_id')
+    .references('id')
+    .inTable('categories')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
+
+    tbl.primary(["mentor_id", "category_id"])
+  })
+
+  .createTable('user_categories', tbl =>{
+    
+  
+    tbl.integer('user_id')
+    .references('id')
+    .inTable('users')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
+
+    tbl.integer('category_id')
+    .references('id')
+    .inTable('categories')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
+
+    tbl.primary(["user_id", "category_id"])
+  })
+
+  .createTable('mentee_list', tbl =>{
+  
+    tbl.integer('user_id')
+    .references('id')
+    .inTable('users')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
+
+    tbl.integer('mentor_id')
+    .references('id')
+    .inTable('mentors')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
+
+    tbl.primary(["user_id", "mentor_id"])
+  })
+
 
 
   
@@ -62,9 +116,9 @@ exports.up = async function (knex, promise) {
 
 exports.down = async function (knex, promise) {
   await knex.schema
-  // .dropTableIfExists('mentor_categories')
-  // .dropTableIfExists('user_interests')
-  // .dropTableIfExists('mentee_list')
+  .dropTableIfExists('mentee_list')
+  .dropTableIfExists('user_interests')
+  .dropTableIfExists('mentor_categories')
   .dropTableIfExists('mentors')
   .dropTableIfExists('categories')
   .dropTableIfExists('users');

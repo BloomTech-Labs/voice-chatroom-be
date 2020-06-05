@@ -30,12 +30,13 @@ function remove(id){
     .where("id", id)
 }
 
-function makeMentor(id){
+function makeMentor(changes,id){
+    // const changes = { isMentor:true }
     return db("users")
     .where("id", id)
     .where({
         isMentor: false,
-    }).update(true)
+    }).update(changes)
 }
 
 

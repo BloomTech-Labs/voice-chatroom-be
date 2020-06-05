@@ -7,17 +7,14 @@ exports.seed = async function (knex, promise) {
         // Inserts seed entries
         return knex("categories").insert([
           {
-       
             category_name: 'tech'
           },
 
           {
-            
             category_name: 'DIY'
           },
 
           {
-            
             category_name: 'business'
           },
         ]);
