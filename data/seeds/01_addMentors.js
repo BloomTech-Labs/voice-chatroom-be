@@ -7,20 +7,20 @@ exports.seed = async function (knex, promise) {
         // Inserts seed entries
         return knex("mentors").insert([
           {
-            mentor_id: 1,
-            username: 'killme'
+          //  1
+            mentor_name: 'thatboi'
            
           },
 
           {
-            
-            username: 'bleh'
+            // 2
+            mentor_name: 'nottheFBI'
 
           },
 
           {
-            
-            username: 'blah'
+            // 3
+            mentor_name: 'ForrestGump'
           },
         ]);
       });

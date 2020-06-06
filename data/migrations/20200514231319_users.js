@@ -1,11 +1,12 @@
 exports.up = async function (knex, promise) {
   await knex.schema
+  // user table
     .createTable('users', (tbl) => {
     tbl.increments('id').unsigned().primary();
     tbl.string('email').unique().notNullable();
     tbl.string('given_name').notNullable();
     tbl.string('family_name').notNullable();
-    tbl.string('username');
+    tbl.string('username').unique()
     tbl.string('location');
     tbl.string('interest_1');
     tbl.string('interest_2');
@@ -14,16 +15,22 @@ exports.up = async function (knex, promise) {
     tbl.binary('avatar');
     tbl.boolean('isMentor')
     .defaultTo(false);
+    tbl.text('user_bio')
   })
-
+  
+  // Categories table
   .createTable('categories', tbl =>{
     tbl.increments('id')
     .unsigned()
     .primary()
     tbl.string('category_name')
+    .unique()
+    .notNullable()
 
-  })
+  }
+  )
 
+  // Mentor table
   .createTable('mentors', tbl =>{
     tbl.increments('id')
     .unsigned()
@@ -40,23 +47,20 @@ exports.up = async function (knex, promise) {
     tbl.string('email')
     tbl.string('given_name')
     tbl.string('family_name')
-    tbl.string('username');
+    tbl.string('username')
     tbl.string('location');
     tbl.binary('avatar')
     tbl.timestamp('created_at').defaultTo(knex.fn.now())
-
-    // categories
+    // mentor specific --new fields
+    tbl.string('mentor_name').unique()
     tbl.string('category_1')
     tbl.string('category_2')
     tbl.string('category_3')
-    
-
     tbl.string('mentor_rating');
-
-    // tbl.string('mentee_list')
-   
+    tbl.text('mentor_bio');
   })
 
+  // MENTOR Categories --needs work
   .createTable('mentor_categories', tbl =>{
    
     tbl.integer('mentor_id')
@@ -71,12 +75,18 @@ exports.up = async function (knex, promise) {
     .onUpdate('CASCADE')
     .onDelete('CASCADE')
 
+    tbl.string('category_name')
+    .references('category_name')
+    .inTable('categories')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
+
     tbl.primary(["mentor_id", "category_id"])
   })
 
-  .createTable('user_categories', tbl =>{
+  // USER Categories --needs work
+  .createTable('user_interests', tbl =>{
     
-  
     tbl.integer('user_id')
     .references('id')
     .inTable('users')
@@ -89,13 +99,26 @@ exports.up = async function (knex, promise) {
     .onUpdate('CASCADE')
     .onDelete('CASCADE')
 
+    tbl.string('category_name')
+    .references('category_name')
+    .inTable('categories')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
+
     tbl.primary(["user_id", "category_id"])
   })
 
+  // MENTOR'S MENTEE LIST
   .createTable('mentee_list', tbl =>{
   
     tbl.integer('user_id')
     .references('id')
+    .inTable('users')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
+    
+    tbl.string('user_name')
+    .references('username')
     .inTable('users')
     .onUpdate('CASCADE')
     .onDelete('CASCADE')
@@ -106,20 +129,24 @@ exports.up = async function (knex, promise) {
     .onUpdate('CASCADE')
     .onDelete('CASCADE')
 
+    tbl.string('mentor_name')
+    .references('mentor_name')
+    .inTable('mentors')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
+
     tbl.primary(["user_id", "mentor_id"])
   })
-
-
-
   
 };
 
 exports.down = async function (knex, promise) {
   await knex.schema
+  
   .dropTableIfExists('mentee_list')
   .dropTableIfExists('user_interests')
   .dropTableIfExists('mentor_categories')
   .dropTableIfExists('mentors')
+  .dropTableIfExists('users')
   .dropTableIfExists('categories')
-  .dropTableIfExists('users');
-};
+}

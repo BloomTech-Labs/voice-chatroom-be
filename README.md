@@ -35,115 +35,183 @@ To get the server running locally:
 
 🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
 
-### Test User Routes
+### User Routes
 
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/users`                | all users      | Returns an array of all users.               |
-| GET    | `/users/:Id`            | all users      | Returns information for a single user.       |  
-| PUT    | `/users/:Id`            | all users      | Modify an existing user.                     |
-| POST   | `/users/`               | all users      | Add a new User.                              |
-| DELETE | `/users/:Id`            | all users      | Delete a specified user.                     |
+| Method | Endpoint                  | Access Control | Description                          |
+| ------ | ------------------------- | -------------- | ------------------------------------ |
+| GET    | `/users`                  | all users      | Returns an array of all users.                               |
+| GET    | `/users/:Id`              | all users      | Returns information for a single user.                         |  
+| PUT    | `/users/:Id`              | all users      | Modify an existing user.                                |
+| POST   | `/users/`                 | all users      | Add a new User.                                |
+| DELETE | `/users/:Id`              | all users      | Delete a specified user.                                |
+
+### Mentor Routes
+
+| Method | Endpoint                  | Access Control | Description                          |
+| ------ | -----------------------   | -------------- | -------------------------------------|
+| GET    | `/mentors`                | all users      | Returns an array of all mentors.                             |
+| GET    | `/mentors/:Id`            | all users      | Returns information for a single mentor.                       |  
+| PUT    | `/mentors/:Id`            | mentors        | Modify an existing mentor.                              |
+| POST   | `/mentors/`               | all users      | Add a new mentor.                              |
+| DELETE | `/mentors/:Id`            | mentors        | Delete a specified mentor.                              |
+
+### Category Routes
+
+| Method | Endpoint                  | Access Control | Description                          |
+| ------ | -----------------------   | -------------- | -------------------------------------|
+| GET    | `/categories`             | all users      | Returns an array of all categories.                          |
+| GET    | `/categories/:Id`         | all users      | Returns information for a single category.                     |  
+| PUT    | `/categories/:Id`         | mentors        | Modify an existing category.                            |
+| POST   | `/categories/`            | mentors        | Add a new category.                            |
+| DELETE | `/categories/:Id`         | mentors        | Delete a specified category.      
 
 
-
-<!-- #### Organization Routes
-
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
-
-#### User Routes
-
-| Method | Endpoint                | Access Control      | Description                                        |
-| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    | -->
 
 # Data Model
 
 🚫This is just an example. Replace this with your data model
 
-### Test User Model
+### User Model
 
 ---
 
 ```
 {
-  id: increment
+  id: increment INTEGER
   email: STRING
-  first_name: STRING
-  last_name: STRING
+  given_name: STRING
+  family_name: STRING
+  username: STRING
+  location: STRING
+  interest_1: STRING
+  interest_2: STRING
+  interest_3: STRING
+  created_at: TIMESTAMP with TIMEZONE
+  avatar: BITVARYING
+  isMentor: BOOLEAN
+  user_bio: TEXT
+  
+}
+```
+### Mentor Model
+
+---
+
+```
+{
+  id: increment INTEGER
+  mentor_id: INTEGER foreign key in USERS table
+  email: STRING
+  given_name: STRING
+  family_name: STRING
+  username: STRING
+  location: STRING
+  avatar: BIT VARYING
+  created_at: TIMESTAMP with TIMEZONE
+  mentor_name: STRING
+  category_1: STRING
+  category_2: STRING
+  category_3: STRING
+  mentor_rating: INTEGER
+  mentor_bio: TEXT
+  
+}
+```
+### Category Model
+
+---
+
+```
+{
+  id: increment INTEGER
+  category_name: STRING
   
 }
 ```
 
-<!-- #### 2️⃣ ORGANIZATIONS
+ ### mentor_categories Model
 
 ---
 
 ```
 {
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
+  mentor_id: INTEGER foreign key in MENTORS table
+  category_id: INTEGER foreign key in CATEGORIES table
+  category_name: STRING foreign key in CATEGORIES table
+  
 }
-``` -->
 
-<!-- #### USERS
+```
+ ### user_interests Model
 
 ---
 
 ```
 {
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
-  email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
+  user_id: INTEGER foreign key in USERS table
+  category_id: INTEGER foreign key in CATEGORIES table
+  category_name: STRING foreign key in CATEGORIES table
+  
 }
-``` -->
+
+```
+
+ ### mentee_list Model
+
+---
+
+```
+{
+  user_id: INTEGER foreign key in USERS table
+  mentor_id: INTEGER foreign key in MENTORS table
+  mentor_name: STRING foreign key in MENTORS table
+  
+}
+
+```
 
 ## 2️⃣ Actions
 
 🚫 This is an example, replace this with the actions that pertain to your backend
 
-`getOrgs()` -> Returns all organizations
+## User Actions
 
-`getOrg(orgId)` -> Returns a single organization by ID
+`find()` -> Returns all users
 
-`addOrg(org)` -> Returns the created org
+`findById(id)` -> Returns a single user by ID
 
-`updateOrg(orgId)` -> Update an organization by ID
+`add(user)` -> Returns the created user
 
-`deleteOrg(orgId)` -> Delete an organization by ID
-<br>
-<br>
-<br>
-`getUsers(orgId)` -> if no param all users
+`update(changes, id)` -> Update a user by ID
 
-`getUser(userId)` -> Returns a single user by user ID
+`remove(id)` -> Delete user by ID
 
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
 
-`updateUser(userId, changes object)` -> Updates a single user by ID.
+## Mentor actions 
 
-`deleteUser(userId)` -> deletes everything dependent on the user
+`find()` -> Returns all mentors
+
+`findById(id)` -> Returns a single mentor by ID
+
+`add(mentor)` -> Returns the created mentor
+
+`update(changes, id)` -> Update a mentor by ID
+
+`remove(id)` -> Delete mentor by ID
+
+## Category actions 
+
+`findCat()` -> Returns all categories
+
+`findCatById(id)` -> Returns a single category by ID
+
+`addCat(cat)` -> Returns the created category
+
+`updateCat(changes, id)` -> Update a category by ID
+
+`removeCat(id)` -> Delete category by ID
+
+
 
 ## 3️⃣ Environment Variables
 

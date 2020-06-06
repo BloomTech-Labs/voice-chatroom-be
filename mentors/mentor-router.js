@@ -48,22 +48,22 @@ router.get('/:id', (req, res) => {
 
 //   add new mentor
 
-router.put('/:id', (req, res) => {
+router.post('/', (req, res) => {
   const mentorData = req.body;
   const { id } = req.params;
 
-  Users.findById(id)
-  .then(user =>{
-    console.log(user)
-    if(user)
-    Users.makeMentor(true, id)
-    res.status(200).json(user)
-  })
-  
-  // Mentors.add(mentorData)
-  // .then(mentor => {
-  //   res.status(201).json(mentorData);
+  // Users.findById(id)
+  // .then(user =>{
+  //   console.log(user)
+  //   if(user)
+  //   Users.makeMentor(true, id)
+  //   res.status(200).json(user)
   // })
+  
+  Mentors.add(mentorData)
+  .then(mentor => {
+    res.status(201).json(mentorData);
+  })
   .catch (err => {
 
     res.status(500).json({

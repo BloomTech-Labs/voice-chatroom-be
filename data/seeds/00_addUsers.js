@@ -7,7 +7,7 @@ exports.seed = async function (knex, promise) {
       // Inserts seed entries
       return knex("users").insert([
         {
-         
+        //  1
           email: "supetest@test.com",
           given_name: "Test",
           family_name: "MctestFace",
@@ -17,7 +17,7 @@ exports.seed = async function (knex, promise) {
           isMentor: true,
         },
         {
-         
+        //  2
           email: "potato@potato.com",
           given_name: "Joe",
           family_name: "yeeterson",
@@ -28,7 +28,7 @@ exports.seed = async function (knex, promise) {
 
         },
         {
-        
+        // 3
           email: "fbi@government.com",
           given_name: "Agent",
           family_name: "007",
@@ -36,6 +36,32 @@ exports.seed = async function (knex, promise) {
           location: "behind you",
           isMentor: true,
         },
+
+        {
+          //4 
+          email: "managerslayer@aol.com",
+          given_name: "karen",
+          family_name: "jones",
+          username: "spk2mgrplz",
+          location: "store near you",
+          avatar: '',
+          isMentor: false,
+
+        },
+
+        {
+         //5 
+          email: "randomguy@aol.com",
+          given_name: "Forrest",
+          family_name: "gump",
+          username: "ForrestGump",
+          location: "running!",
+          avatar: '',
+          isMentor: true,
+
+        },
+        
+
       ]);
     });
 };
