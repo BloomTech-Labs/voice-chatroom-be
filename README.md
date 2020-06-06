@@ -9,7 +9,7 @@
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) 
 
 ## 1️⃣ Getting started
 
@@ -37,37 +37,37 @@ To get the server running locally:
 
 ### User Routes
 
-| Method | Endpoint                  | Access Control | Description                          |
-| ------ | ------------------------- | -------------- | ------------------------------------ |
-| GET    | `/users`                  | all users      | Returns an array of all users.                               |
-| GET    | `/users/:Id`              | all users      | Returns information for a single user.                         |  
-| PUT    | `/users/:Id`              | all users      | Modify an existing user.                                |
-| POST   | `/users/`                 | all users      | Add a new User.                                |
-| DELETE | `/users/:Id`              | all users      | Delete a specified user.                                |
+| Method | Endpoint                  | Access Control | Description                               |
+| ------ | ------------------------- | -------------- | ----------------------------------------- |
+| GET    | `/users`                  | all users      | Returns an array of all users.            |
+| GET    | `/users/:Id`              | all users      | Returns information for a single user.    |  
+| PUT    | `/users/:Id`              | all users      | Modify an existing user.                  |
+| POST   | `/users/`                 | all users      | Add a new User.                           |
+| DELETE | `/users/:Id`              | all users      | Delete a specified user.                  |
 
 ### Mentor Routes
 
-| Method | Endpoint                  | Access Control | Description                          |
-| ------ | -----------------------   | -------------- | -------------------------------------|
-| GET    | `/mentors`                | all users      | Returns an array of all mentors.                             |
-| GET    | `/mentors/:Id`            | all users      | Returns information for a single mentor.                       |  
-| PUT    | `/mentors/:Id`            | mentors        | Modify an existing mentor.                              |
-| POST   | `/mentors/`               | all users      | Add a new mentor.                              |
-| DELETE | `/mentors/:Id`            | mentors        | Delete a specified mentor.                              |
+| Method | Endpoint                  | Access Control | Description                               |
+| ------ | -----------------------   | -------------- | ----------------------------------------- |
+| GET    | `/mentors`                | all users      | Returns an array of all mentors.          |
+| GET    | `/mentors/:Id`            | all users      | Returns information for a single mentor.  |  
+| PUT    | `/mentors/:Id`            | mentors        | Modify an existing mentor.                |
+| POST   | `/mentors/`               | all users      | Add a new mentor.                         |
+| DELETE | `/mentors/:Id`            | mentors        | Delete a specified mentor.                |
 
 ### Category Routes
 
-| Method | Endpoint                  | Access Control | Description                          |
-| ------ | -----------------------   | -------------- | -------------------------------------|
-| GET    | `/categories`             | all users      | Returns an array of all categories.                          |
-| GET    | `/categories/:Id`         | all users      | Returns information for a single category.                     |  
-| PUT    | `/categories/:Id`         | mentors        | Modify an existing category.                            |
-| POST   | `/categories/`            | mentors        | Add a new category.                            |
-| DELETE | `/categories/:Id`         | mentors        | Delete a specified category.      
+| Method | Endpoint                  | Access Control | Description                               |
+| ------ | -----------------------   | -------------- | ----------------------------------------- |
+| GET    | `/categories`             | all users      | Returns an array of all categories.                       
+| GET    | `/categories/:Id`         | all users      | Returns information for a single category.|
+| PUT    | `/categories/:Id`         | mentors        | Modify an existing category.              |
+| POST   | `/categories/`            | mentors        | Add a new category.                       |
+| DELETE | `/categories/:Id`         | mentors        | Delete a specified category.              |
 
 
 
-# Data Model
+# Data Models
 
 🚫This is just an example. Replace this with your data model
 
