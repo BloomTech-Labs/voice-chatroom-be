@@ -1,15 +1,11 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/5b1332f7827000a86252/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/voice-chatroom-be/maintainability) 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/5b1332f7827000a86252/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/voice-chatroom-be/test_coverage)
 
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
+.
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) 
+#### 1️⃣ Backend delpoyed at [Heroku](https://Wyzerapp.heroku.com) 
 
 ## 1️⃣ Getting started
 
@@ -33,7 +29,7 @@ To get the server running locally:
 
 ## 2️⃣ Endpoints
 
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
+
 
 ### User Routes
 
@@ -42,6 +38,7 @@ To get the server running locally:
 | GET    | `/users`                  | all users      | Returns an array of all users.            |
 | GET    | `/users/:Id`              | all users      | Returns information for a single user.    |  
 | PUT    | `/users/:Id`              | all users      | Modify an existing user.                  |
+|  PUT   | `/users/:Id/mentor`       | all users      | Makes existing user a mentor
 | POST   | `/users/`                 | all users      | Add a new User.                           |
 | DELETE | `/users/:Id`              | all users      | Delete a specified user.                  |
 
@@ -69,7 +66,6 @@ To get the server running locally:
 
 # Data Models
 
-🚫This is just an example. Replace this with your data model
 
 ### User Model
 
@@ -101,13 +97,6 @@ To get the server running locally:
 {
   id: increment INTEGER
   mentor_id: INTEGER foreign key in USERS table
-  email: STRING
-  given_name: STRING
-  family_name: STRING
-  username: STRING
-  location: STRING
-  avatar: BIT VARYING
-  created_at: TIMESTAMP with TIMEZONE
   mentor_name: STRING
   category_1: STRING
   category_2: STRING
@@ -137,7 +126,6 @@ To get the server running locally:
 {
   mentor_id: INTEGER foreign key in MENTORS table
   category_id: INTEGER foreign key in CATEGORIES table
-  category_name: STRING foreign key in CATEGORIES table
   
 }
 
@@ -150,7 +138,6 @@ To get the server running locally:
 {
   user_id: INTEGER foreign key in USERS table
   category_id: INTEGER foreign key in CATEGORIES table
-  category_name: STRING foreign key in CATEGORIES table
   
 }
 
@@ -164,7 +151,6 @@ To get the server running locally:
 {
   user_id: INTEGER foreign key in USERS table
   mentor_id: INTEGER foreign key in MENTORS table
-  mentor_name: STRING foreign key in MENTORS table
   
 }
 
@@ -172,7 +158,6 @@ To get the server running locally:
 
 ## 2️⃣ Actions
 
-🚫 This is an example, replace this with the actions that pertain to your backend
 
 ## User Actions
 

@@ -34,9 +34,7 @@ function makeMentor(changes,id){
     // const changes = { isMentor:true }
     return db("users")
     .where("id", id)
-    .where({
-        isMentor: false,
-    }).update(changes)
+    .update(changes)
 }
 
 

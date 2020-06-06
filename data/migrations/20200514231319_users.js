@@ -43,15 +43,6 @@ exports.up = async function (knex, promise) {
     .onUpdate('CASCADE')
     .onDelete('CASCADE');
 
-    // user info to carry over?
-    tbl.string('email')
-    tbl.string('given_name')
-    tbl.string('family_name')
-    tbl.string('username')
-    tbl.string('location');
-    tbl.binary('avatar')
-    tbl.timestamp('created_at').defaultTo(knex.fn.now())
-    // mentor specific --new fields
     tbl.string('mentor_name').unique()
     tbl.string('category_1')
     tbl.string('category_2')
@@ -75,11 +66,6 @@ exports.up = async function (knex, promise) {
     .onUpdate('CASCADE')
     .onDelete('CASCADE')
 
-    tbl.string('category_name')
-    .references('category_name')
-    .inTable('categories')
-    .onUpdate('CASCADE')
-    .onDelete('CASCADE')
 
     tbl.primary(["mentor_id", "category_id"])
   })
@@ -99,11 +85,6 @@ exports.up = async function (knex, promise) {
     .onUpdate('CASCADE')
     .onDelete('CASCADE')
 
-    tbl.string('category_name')
-    .references('category_name')
-    .inTable('categories')
-    .onUpdate('CASCADE')
-    .onDelete('CASCADE')
 
     tbl.primary(["user_id", "category_id"])
   })
@@ -117,20 +98,8 @@ exports.up = async function (knex, promise) {
     .onUpdate('CASCADE')
     .onDelete('CASCADE')
     
-    tbl.string('user_name')
-    .references('username')
-    .inTable('users')
-    .onUpdate('CASCADE')
-    .onDelete('CASCADE')
-
     tbl.integer('mentor_id')
     .references('id')
-    .inTable('mentors')
-    .onUpdate('CASCADE')
-    .onDelete('CASCADE')
-
-    tbl.string('mentor_name')
-    .references('mentor_name')
     .inTable('mentors')
     .onUpdate('CASCADE')
     .onDelete('CASCADE')

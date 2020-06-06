@@ -110,46 +110,25 @@ router.put('/:id', (req, res) => {
   });
 //                                      Mentor and Category Routes
   // make mentor
-  router.put('/:id/mentor', (req, res) => {
+  router.put('/:id/mentor', async (req, res) => {
     const { id } = req.params;
-  
-    // Users.findById(id, (err, foundUser ) =>{
-    //   console.log(foundUser.isMentor);
-    //   if (err){
-    //     console.log(err);
-    //   } else if (foundUser.isMentor !==true) {
-    //     Users.update(id , {$set: {isMentor: true}});
-
-    //   }
-    //   else {
-    //     Users.update(id, {$set: {isMentor: false}});
-    //   }
-    //   return(foundUser)
-    // });
-    //  //  Error handling needs to be reviewed
-
-    Users.findById(id)
+    const changes = {isMentor:true};
+  await Users.findById(id)
     .then(user =>{
-      if(user.isMentor !==true)
-      Users.makeMentor(id)
-    })
-    // Mentors.add(mentorData)
-    // .then(mentor => {
-    //   res.status(201).json(mentorData);
-    // })
+      console.log(user)
+      if(user)
+      Users.makeMentor(changes, id)
+      .then(
+        res.status(200).json(user)
+
+      )
     .catch (err => {
       res.status(500).json({
            message: 'Failed to create new mentor'
            });
     });
-     
+      
   });
-
-  // router.get('/mentor/:id', (req, res) =>{
-  //   const { id } = req.params;
-
-  //   Users.findById(id, (user) =>{
-  //     console.log(user)
-  //   })
-  // })
+  
+  })
 module.exports = router;
