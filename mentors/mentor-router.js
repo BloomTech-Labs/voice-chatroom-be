@@ -156,7 +156,7 @@ router.post('/categories', (req, res) => {
 
   // Get Mentor Categories by ID
 
-  router.get('/:id/interests', async (req, res) =>{
+  router.get('/:id/categories', async (req, res) =>{
     const { id } = req.params;
 
     await Mentors.findMentorById()
