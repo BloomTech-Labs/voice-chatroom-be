@@ -1,13 +1,13 @@
 const db = require('../data/config')
 
-function find(){
+function findMentor(){
     return db('mentors')
 }
 // selects all users from users table
 
 // Finds mentor by ID
 
-function findById(id){
+function findMentorById(id){
     return db('mentors')
     .where("id", id)
     // .limit(1)
@@ -16,20 +16,20 @@ function findById(id){
 
 
 // add new mentor
-function add(mentor){
+function addMentor(mentor){
     return db('mentors')
     .insert(mentor)
 }
 
 // Update mentor
-function update(changes, id){
+function updateMentor(changes, id){
     return db('mentors')
     .update(changes)
     .where("id", id)
 }
 
 // Delete mentor
-function remove(id){
+function removeMentor(id){
     return db('mentors')
     .del()
     .where("id", id)
@@ -48,13 +48,24 @@ function removeCategory(id){
     .where("id", id)
 }
 
+
+
+function getMentorCategories(id){
+    
+    return db('mentor_categories as mc')
+        .innerJoin('mentors as m', 'mc.category_id', 'm.id' )
+        .innerJoin('categories as c', 'mc.category_id', 'c.id')
+        .select('c.category_name')
+        .where('m.id', id)
+}
 module.exports ={
-    find,
-    findById,
-    add,
-    update,
-    remove,
+    findMentor,
+    findMentorById,
+    addMentor,
+    updateMentor,
+    removeMentor,
     addCategory,
     removeCategory,
+    getMentorCategories,
 }
 

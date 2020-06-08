@@ -31,7 +31,7 @@ function remove(id){
 }
 
 function makeMentor(changes,id){
-    // const changes = { isMentor:true }
+    
     return db("users")
     .where("id", id)
     .update(changes)

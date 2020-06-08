@@ -131,4 +131,26 @@ router.put('/:id', (req, res) => {
   });
   
   })
+
+  // Get User Interests (categories) by ID
+
+ router.get('/:id/interests', async (req, res) =>{
+    const { id } = req.params;
+
+    await Users.findById()
+    .then(user =>{
+      if(user)
+      Users.getUserInterests(id)
+      .then(
+        res.status(200).json(user)
+      )
+      .catch (err =>{
+        res.status(500).json({
+          message: 'Failed to get user interests.'
+        });
+      });
+    });
+ })
+
+
 module.exports = router;

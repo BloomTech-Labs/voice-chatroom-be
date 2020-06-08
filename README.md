@@ -11,8 +11,6 @@
 
 To get the server running locally:
 
-🚫 adjust these scripts to match your project
-
 - Clone this repo
 - **npm install** to install all required dependencies
 - **npm start** to start the local server
@@ -27,7 +25,8 @@ To get the server running locally:
 -    Point Three
 -    Point Four
 
-## 2️⃣ Endpoints
+
+## Endpoints
 
 
 
@@ -37,8 +36,9 @@ To get the server running locally:
 | ------ | ------------------------- | -------------- | ----------------------------------------- |
 | GET    | `/users`                  | all users      | Returns an array of all users.            |
 | GET    | `/users/:Id`              | all users      | Returns information for a single user.    |  
+| GET    | `/users/:Id/interests`    | specific user  | Returns list of interests for single user.|
 | PUT    | `/users/:Id`              | all users      | Modify an existing user.                  |
-|  PUT   | `/users/:Id/mentor`       | all users      | Makes existing user a mentor
+| PUT    | `/users/:Id/mentor`       | all users      | Makes existing user a mentor
 | POST   | `/users/`                 | all users      | Add a new User.                           |
 | DELETE | `/users/:Id`              | all users      | Delete a specified user.                  |
 
@@ -48,6 +48,7 @@ To get the server running locally:
 | ------ | -----------------------   | -------------- | ----------------------------------------- |
 | GET    | `/mentors`                | all users      | Returns an array of all mentors.          |
 | GET    | `/mentors/:Id`            | all users      | Returns information for a single mentor.  |  
+| GET    | `/mentors/:Id/categories` | specific mentor| Returns list of categories for a mentor.  |
 | PUT    | `/mentors/:Id`            | mentors        | Modify an existing mentor.                |
 | POST   | `/mentors/`               | all users      | Add a new mentor.                         |
 | DELETE | `/mentors/:Id`            | mentors        | Delete a specified mentor.                |
@@ -174,15 +175,15 @@ To get the server running locally:
 
 ## Mentor actions 
 
-`find()` -> Returns all mentors
+`findMentor()` -> Returns all mentors
 
-`findById(id)` -> Returns a single mentor by ID
+`findMentorById(id)` -> Returns a single mentor by ID
 
-`add(mentor)` -> Returns the created mentor
+`addMentor(mentor)` -> Returns the created mentor
 
-`update(changes, id)` -> Update a mentor by ID
+`updateMentor(changes, id)` -> Update a mentor by ID
 
-`remove(id)` -> Delete mentor by ID
+`removeMentor(id)` -> Delete mentor by ID
 
 ## Category actions 
 

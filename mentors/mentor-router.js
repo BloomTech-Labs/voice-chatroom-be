@@ -1,7 +1,7 @@
 const express = require('express');
 const userAuth =require('../auth/userAuth')
 const Mentors = require('./mentor-model');
-const Users = require('../users/user-model');
+const Cat = require('../categories/categoryModel');
 
 const router = express.Router({
     mergeParams: true,
@@ -12,7 +12,7 @@ const router = express.Router({
     
 // GET all mentors
 router.get('/', userAuth, (req, res) =>{
-    Mentors.find()
+    Mentors.findMentor()
     .then(mentors =>{
         res.json(mentors);
     })
@@ -28,7 +28,7 @@ router.get('/', userAuth, (req, res) =>{
 router.get('/:id', (req, res) => {
     const { id } = req.params;
   
-    Mentors.findById(id)
+    Mentors.findMentorById(id)
     .then(mentor => {
       if (mentor) {
         res.json(mentor);
@@ -52,7 +52,7 @@ router.post('/', (req, res) => {
   const mentorData = req.body;
   const { id } = req.params;
 
-  Mentors.add(mentorData)
+  Mentors.addMentor(mentorData)
   .then(mentor => {
     res.status(201).json(mentorData);
   })
@@ -71,10 +71,10 @@ router.put('/:id', (req, res) => {
     const { id } = req.params;
     const changes = req.body;
   
-    Mentors.findById(id)
+    Mentors.findMentorById(id)
     .then(mentor => {
       if (mentor) {
-        Mentors.update(changes, id)
+        Mentors.updateMentor(changes, id)
         .then(updatedMentor => {
           res.json(updatedMentor);
         });
@@ -96,7 +96,7 @@ router.put('/:id', (req, res) => {
   router.delete('/:id', (req, res) => {
     const { id } = req.params;
   
-    Mentors.remove(id)
+    Mentors.removeMentor(id)
     .then(deleted => {
       if (deleted) {
         res.json({ removed: deleted });
@@ -116,17 +116,17 @@ router.put('/:id', (req, res) => {
 //                                      Category Routes
   // add category
 router.post('/categories', (req, res) => {
-    const categoryData= req.body;
+    const catsData= req.body;
   
-    Mentors.addCategory(categoryData)
+    Cat.addCat(catsData)
     .then(mentor => {
-      res.status(201).json(categoryData);
+      res.status(201).json(catsData);
     })
     .catch (err => {
       res.status(500).json({
            message: 'Failed to create new category'
            
-           });
+           }); 
            console.log(err)
     });
   });
@@ -135,7 +135,7 @@ router.post('/categories', (req, res) => {
   router.delete('/categories/:id', (req, res) => {
     const { id } = req.params;
   
-    Mentors.removeCategory(id)
+    Cat.removeCat(id)
     .then(deleted => {
       if (deleted) {
         res.json({ removed: deleted });
@@ -151,5 +151,28 @@ router.post('/categories', (req, res) => {
         });
     });
   });
+
+
+
+  // Get Mentor Categories by ID
+
+  router.get('/:id/interests', async (req, res) =>{
+    const { id } = req.params;
+
+    await Mentors.findMentorById()
+    .then(user =>{
+      if(user)
+      Mentors.getMentorCategories(id)
+      .then(
+        res.status(200).json(user)
+      )
+      .catch (err =>{
+        res.status(500).json({
+          message: 'Failed to get mentor categories.'
+        });
+      });
+    });
+ })
+
 
 module.exports = router;
