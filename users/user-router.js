@@ -7,6 +7,7 @@ const router = express.Router({
 });
 
 // GET all users
+
 router.get('/', userAuth, (req, res) =>{
     Users.find()
     .then(users =>{
@@ -21,6 +22,7 @@ router.get('/', userAuth, (req, res) =>{
 
 
 // GET User by ID
+
 router.get('/:id', (req, res) => {
     const { id } = req.params;
   
@@ -37,22 +39,29 @@ router.get('/:id', (req, res) => {
      //  Error handling needs to be reviewed
     .catch(err => {
       res.status(500).json({ message: 'Failed to get users' });
+      console.log(err)
     });
   });
+
+  // Add User
 
 router.post('/', (req, res) => {
   const userData = req.body;
 
   Users.add(userData)
-  .then(user => {
-    res.status(201).json(user);
+  .then(userData => {
+    res.status(201).json({message: 'User Created'});
   })
   .catch (err => {
     res.status(500).json({
          message: 'Failed to create new user'
+         
          });
+         console.log(err)
   });
 });
+
+// Edit User
 
 router.put('/:id', (req, res) => {
     const { id } = req.params;
@@ -79,6 +88,7 @@ router.put('/:id', (req, res) => {
     });
   });
   
+  // Delete User
   router.delete('/:id', (req, res) => {
     const { id } = req.params;
   
@@ -98,6 +108,49 @@ router.put('/:id', (req, res) => {
         });
     });
   });
+//                                      Mentor and Category Routes
+  // make mentor
+  router.put('/:id/mentor', async (req, res) => {
+    const { id } = req.params;
+    const changes = {isMentor:true};
+  await Users.findById(id)
+    .then(user =>{
+      console.log(user)
+      if(user)
+      Users.makeMentor(changes, id)
+      .then(
+        res.status(200).json(user)
+
+      )
+    .catch (err => {
+      res.status(500).json({
+           message: 'Failed to create new mentor'
+           });
+    });
+      
+  });
+  
+  })
+
+  // Get User Interests (categories) by ID
+
+ router.get('/:id/interests', async (req, res) =>{
+    const { id } = req.params;
+
+    await Users.findById()
+    .then(user =>{
+      if(user)
+      Users.getUserInterests(id)
+      .then(
+        res.status(200).json(user)
+      )
+      .catch (err =>{
+        res.status(500).json({
+          message: 'Failed to get user interests.'
+        });
+      });
+    });
+ })
 
 
 module.exports = router;
