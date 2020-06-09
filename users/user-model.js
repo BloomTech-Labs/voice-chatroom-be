@@ -8,7 +8,7 @@ function find(){
 function findById(id){
     return db("users")
     .where("id", id)
-    // .limit(1)
+    .limit(1)
 
 }
 // Matches ID value within users table
@@ -39,23 +39,6 @@ function makeMentor(changes,id){
 
 
 
-function getUserInterests(id){
-    
-    return db('user_interests as ui')
-        .innerJoin('users as u', 'ui.category_id', 'u.id' )
-        .innerJoin('categories as c', 'ui.category_id', 'c.id')
-        .select('c.category_name')
-        .where('u.id', id)
-}
-
-function addInterest(category){
-    return db("user_interests as ui")
-        .innerJoin('users as u', 'ui.category_id', 'u.id')
-        .innerJoin('categories as c', 'ui.category_id', 'c.id')
-        .insert('c.category_id')
-        .where('u.id', id)
-    
-}
 
 module.exports ={
     find,
@@ -64,6 +47,5 @@ module.exports ={
     update,
     remove,
     makeMentor,
-    getUserInterests
 }
 

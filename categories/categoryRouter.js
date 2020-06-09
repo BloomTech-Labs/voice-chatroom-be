@@ -90,7 +90,7 @@ router.put('/:id', (req, res) => {
     });
   });
   
-//   delete cats
+//   delete categories
   router.delete('/:id', (req, res) => {
     const { id } = req.params;
   

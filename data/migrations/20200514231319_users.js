@@ -16,6 +16,7 @@ exports.up = async function (knex, promise) {
     tbl.boolean('isMentor')
     .defaultTo(false);
     tbl.text('user_bio')
+    tbl.integer('user_rating')
   })
   
   // Categories table
@@ -51,43 +52,6 @@ exports.up = async function (knex, promise) {
     tbl.text('mentor_bio');
   })
 
-  // MENTOR Categories --needs work
-  .createTable('mentor_categories', tbl =>{
-   
-    tbl.integer('mentor_id')
-    .references('id')
-    .inTable('mentors')
-    .onUpdate('CASCADE')
-    .onDelete('CASCADE')
-
-    tbl.integer('category_id')
-    .references('id')
-    .inTable('categories')
-    .onUpdate('CASCADE')
-    .onDelete('CASCADE')
-
-
-    tbl.primary(["mentor_id", "category_id"])
-  })
-
-  // USER Categories --needs work
-  .createTable('user_interests', tbl =>{
-    
-    tbl.integer('user_id')
-    .references('id')
-    .inTable('users')
-    .onUpdate('CASCADE')
-    .onDelete('CASCADE')
-
-    tbl.integer('category_id')
-    .references('id')
-    .inTable('categories')
-    .onUpdate('CASCADE')
-    .onDelete('CASCADE')
-
-
-    tbl.primary(["user_id", "category_id"])
-  })
 
   // MENTOR'S MENTEE LIST
   .createTable('mentee_list', tbl =>{
