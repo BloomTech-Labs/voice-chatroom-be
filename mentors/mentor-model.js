@@ -35,37 +35,13 @@ function removeMentor(id){
     .where("id", id)
 }
 
-// Adds new catgory (not mentor specific yet)
-function addCategory(category){
-    return db('categories')
-    .insert(category, )
-}
 
-// Deletes category (not mentor specific yet)
-function removeCategory(id){
-    return db('categories')
-    .del()
-    .where("id", id)
-}
-
-
-
-function getMentorCategories(id){
-    
-    return db('mentor_categories as mc')
-        .innerJoin('mentors as m', 'mc.category_id', 'm.id' )
-        .innerJoin('categories as c', 'mc.category_id', 'c.id')
-        .select('c.category_name')
-        .where('m.id', id)
-}
 module.exports ={
     findMentor,
     findMentorById,
     addMentor,
     updateMentor,
     removeMentor,
-    addCategory,
-    removeCategory,
-    getMentorCategories,
+    
 }
 

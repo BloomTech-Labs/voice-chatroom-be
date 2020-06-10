@@ -137,20 +137,23 @@ router.put('/:id', (req, res) => {
  router.get('/:id/interests', async (req, res) =>{
     const { id } = req.params;
 
-    await Users.findById()
+    await Users.findById(id)
     .then(user =>{
-      if(user)
-      Users.getUserInterests(id)
-      .then(
-        res.status(200).json(user)
-      )
-      .catch (err =>{
-        res.status(500).json({
-          message: 'Failed to get user interests.'
-        });
+      const {interest_1, interest_2, interest_3} = user[0]
+      res.status(200).json({
+        interest_1,
+        interest_2,
+        interest_3
+      })
+     
+    })
+    .catch (err =>{
+      res.status(500).json({
+        message: 'Failed to get user interests.'
       });
+      console.log(err)
     });
- })
+  })
 
 
 module.exports = router;

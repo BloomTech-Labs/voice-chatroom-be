@@ -87,7 +87,7 @@ To get the server running locally:
   avatar: BITVARYING
   isMentor: BOOLEAN
   user_bio: TEXT
-  
+  user_rating: INTEGER
 }
 ```
 ### Mentor Model

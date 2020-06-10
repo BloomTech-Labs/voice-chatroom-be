@@ -1,7 +1,7 @@
 const express = require('express');
 const userAuth =require('../auth/userAuth')
 const Mentors = require('./mentor-model');
-const Cat = require('../categories/categoryModel');
+
 
 const router = express.Router({
     mergeParams: true,
@@ -114,65 +114,30 @@ router.put('/:id', (req, res) => {
   });
 
 //                                      Category Routes
-  // add category
-router.post('/categories', (req, res) => {
-    const catsData= req.body;
-  
-    Cat.addCat(catsData)
-    .then(mentor => {
-      res.status(201).json(catsData);
-    })
-    .catch (err => {
-      res.status(500).json({
-           message: 'Failed to create new category'
-           
-           }); 
-           console.log(err)
-    });
-  });
-
-//   delete category (not mentor specific)
-  router.delete('/categories/:id', (req, res) => {
-    const { id } = req.params;
-  
-    Cat.removeCat(id)
-    .then(deleted => {
-      if (deleted) {
-        res.json({ removed: deleted });
-      } else {
-        res.status(404).json({
-             message: 'Could not find category with given id' 
-            });
-      }
-    })
-    .catch(err => {
-      res.status(500).json({
-           message: 'Failed to delete category' 
-        });
-    });
-  });
-
-
 
   // Get Mentor Categories by ID
 
-  router.get('/:id/interests', async (req, res) =>{
+   router.get('/:id/categories', async (req, res) =>{
     const { id } = req.params;
 
-    await Mentors.findMentorById()
+    await Mentors.findMentorById(id)
     .then(user =>{
-      if(user)
-      Mentors.getMentorCategories(id)
-      .then(
-        res.status(200).json(user)
-      )
-      .catch (err =>{
-        res.status(500).json({
-          message: 'Failed to get mentor categories.'
-        });
+      const {category_1, category_2, category_3} = user[0]
+      res.status(200).json({
+        category_1,
+        category_2,
+        category_3
+      })
+     
+    })
+    .catch (err =>{
+      res.status(500).json({
+        message: 'Failed to get mentor categories.'
       });
+      console.log(err)
     });
- })
+  })
+ 
 
 
 module.exports = router;
