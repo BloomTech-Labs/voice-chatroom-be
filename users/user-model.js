@@ -8,7 +8,7 @@ function find(){
 function findById(id){
     return db("users")
     .where("id", id)
-    .limit(1)
+    // .limit(1)
 
 }
 // Matches ID value within users table
