@@ -87,6 +87,48 @@ describe('POST /mentors', function () {
   });
 });
 
+// TEST editing user
+describe('PUT /users/:id',  function () {
+
+
+
+  let data = {
+      "given_name": "Mc",
+      "family_name": "Hammerzo",
+      "email": "dummyfda@test.com"
+  }
+  
+  it('respond with 200 OK', function (done) {
+      supertest(app)
+          .put('/users/1')
+          .send(data)
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end((err) => {
+              if (err) return done(err);
+              done();
+          });
+  });
+});
+
+
+// TEST deleting a user
+describe('DELETE /users/:id',  function () {
+
+  it('respond with 200 OK', function (done) {
+      supertest(app)
+          .delete('/users/1')
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end((err) => {
+              if (err) return done(err);
+              done();
+          });
+  });
+});
+
 
 // // * Testing get a user endpoint by giving a non-existing user
 // //  */
