@@ -9,25 +9,14 @@
 
 // // // })
 
-// test("creating a user", async () => {
-//   await request(server)
-//     .post("/users")
-//     .send({
-//       email: "happy@testing.org",
-//       first_name: "MC",
-//       last_name: "Hammer",
-//     })
-//     .expect(201);
-// });
 
-// test("Should log in user", async () => {
-//     await request(server).post("/users")
-// })
-
+require("dotenv").config();
 const app = require('../app')
 const supertest = require('supertest')
 const request = supertest(app)
-const knex = require('knex')(config);
+const knex = require('../knexfile');
+
+
 
 it('Gets the welcome endpoint', async done =>{
   const response = await request.get('/')
@@ -40,21 +29,38 @@ it('Gets the welcome endpoint', async done =>{
 
 
 
-describe('test suite description', () => {
-  beforeAll(() => {
-    return knex.migrate.latest();
-    return knex.seed.run()
-  });
-  afterAll(() => {
-    return knex.migrate
-      .rollback()
-      .then(() => knex.destroy());
-  });
+// test("Should log in user", async () => {
+//     await request(request).post("/users")
+// })
+// 
+describe('POST /users', function () {
 
-  test('test 1', () => {
-    // testing stuff
+  let data = {
+      "given_name": "MCd",
+      "family_name": "Hammer",
+      "email": "dummys@test.com"
+  }
+  
+  it('respond with 201 created', function (done) {
+      supertest(app)
+          .post('/users')
+          .send(data)
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(201)
+          .end((err) => {
+              if (err) return done(err);
+              done();
+          });
   });
-  test('test 2', () => {
-    // testing other stuff
+});
+
+describe('GET /user/:id', function () {
+  it('respond with json containing a single user', function (done) {
+      supertest(app)
+          .get('/users/1')
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200, done);
   });
 });
