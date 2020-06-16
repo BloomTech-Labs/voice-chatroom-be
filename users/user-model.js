@@ -8,10 +8,16 @@ function find(){
 function findById(id){
     return db("users")
     .where("id", id)
-    .limit(1)
+    // .limit(1)
 
 }
 // Matches ID value within users table
+
+function findByEmail(email){
+    console.log(email)
+    return db("users")
+    .where("email", email)
+}
 
 function add(user){
     return db("users")
@@ -47,5 +53,6 @@ module.exports ={
     update,
     remove,
     makeMentor,
+    findByEmail
 }
 

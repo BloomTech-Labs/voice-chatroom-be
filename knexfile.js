@@ -11,11 +11,10 @@ module.exports = {
   },
 
   test: {
-    client: "sqlite3",
+    client: "pg",
     useNullAsDefault: true,
-    connection: {
-      filename: './data/users.db3'
-    },
+    connection: process.env.TEST_URL,
+    
     migrations: {
       directory: "./data/migrations",
     },
