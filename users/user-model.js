@@ -13,6 +13,12 @@ function findById(id){
 }
 // Matches ID value within users table
 
+function findByEmail(email){
+    console.log(email)
+    return db("users")
+    .where("email", email)
+}
+
 function add(user){
     return db("users")
     .insert(user)
@@ -47,5 +53,6 @@ module.exports ={
     update,
     remove,
     makeMentor,
+    findByEmail
 }
 

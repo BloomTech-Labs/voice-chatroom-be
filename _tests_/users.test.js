@@ -1,6 +1,3 @@
-
-
-
 require("dotenv").config();
 const app = require('../app')
 const supertest = require('supertest')
@@ -33,8 +30,8 @@ describe('POST /users',  function () {
 
 
   let data = {
-      "given_name": "MCo",
-      "family_name": "Hammerz",
+      "given_name": "MC",
+      "family_name": "Hammer",
       "email": "dummyfd@test.com"
   }
   
