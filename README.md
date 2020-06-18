@@ -40,6 +40,7 @@ To get the server running locally:
 | PUT    | `/users/:Id`              | all users      | Modify an existing user.                  |
 | PUT    | `/users/:Id/mentor`       | all users      | Makes existing user a mentor
 | POST   | `/users/`                 | all users      | Add a new User.                           |
+| POST   | `/users/email`            | all users      | Gets a user by Email value sent.          |
 | DELETE | `/users/:Id`              | all users      | Delete a specified user.                  |
 
 ### Mentor Routes
