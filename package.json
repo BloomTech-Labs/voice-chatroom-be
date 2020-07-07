@@ -6,7 +6,16 @@
 	"scripts": {
 		"start": "nodemon index.js",
 		"test": "cross-env NODE_ENV=test jest --verbose --detectOpenHandles --forceExit",
-		"test:watch": "jest --watch"
+		"test:watch": "jest --watch",
+		"coverage": "jest --coverage --detectOpenHandles --forceExit || true"
+	},
+	"jest": {
+		"collectCoverageFrom": [
+			"**/*.js",
+			"!**/node_modules/**",
+			"!**/vendor/**",
+			"!**/__tests__/**"
+		]
 	},
 	"repository": {
 		"type": "git",
