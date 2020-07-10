@@ -89,9 +89,16 @@ router.put("/:id", (req, res) => {
 	Users.findById(id)
 		.then((user) => {
 			if (user) {
-				Users.update(changes, id).then((updatedUser) => {
-					res.json(updatedUser);
-				});
+				Users.update(changes, id)
+					.then((updatedUser) => {
+						res.json(updatedUser);
+					})
+					.catch((err) => {
+						res.status(500).json({
+							message: "Failed to update user",
+						});
+					});
+
 				// Need to check error handling
 			} else {
 				res.status(404).json({
@@ -101,7 +108,7 @@ router.put("/:id", (req, res) => {
 		})
 		.catch((err) => {
 			res.status(500).json({
-				message: "Failed to update user",
+				message: "That user does not exist",
 			});
 		});
 });
