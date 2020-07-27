@@ -5,9 +5,9 @@
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [Heroku](https://Wyzerapp.heroku.com) 
+####  Backend delpoyed at [Heroku](https://Wyzerapp.heroku.com) 
 
-## 1️⃣ Getting started
+##  Getting started
 
 To get the server running locally:
 
@@ -18,12 +18,10 @@ To get the server running locally:
 
 ### Backend framework goes here
 
-🚫 Why did you choose this framework?
-
--    Point One
--    Point Two
--    Point Three
--    Point Four
+-    Stateless/Flexible framework.
+-    Clean and Organized.
+-    Separation between client and server increases scalability.
+-    Adapts well to new environments and syntax.
 
 
 ## Endpoints
@@ -120,30 +118,6 @@ To get the server running locally:
 }
 ```
 
- ### mentor_categories Model
-
----
-
-```
-{
-  mentor_id: INTEGER foreign key in MENTORS table
-  category_id: INTEGER foreign key in CATEGORIES table
-  
-}
-
-```
- ### user_interests Model
-
----
-
-```
-{
-  user_id: INTEGER foreign key in USERS table
-  category_id: INTEGER foreign key in CATEGORIES table
-  
-}
-
-```
 
  ### mentee_list Model
 
@@ -158,7 +132,7 @@ To get the server running locally:
 
 ```
 
-## 2️⃣ Actions
+## Actions
 
 
 ## User Actions
@@ -200,19 +174,16 @@ To get the server running locally:
 
 
 
-## 3️⃣ Environment Variables
+## Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables.
 
 create a .env file that includes the following:
 
-🚫 These are just examples, replace them with the specifics for your app
-    
-    *  STAGING_DB - optional development db for using functionality not available in SQLite
-    *  NODE_ENV - set to "development" until ready for "production"
-    *  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])
-    *  SENDGRID_API_KEY - this is generated in your Sendgrid account
-    *  stripe_secret - this is generated in the Stripe dashboard
+* OKTA_ORG_URL
+* OKTA_API_TOKEN
+* DB_URL
+* TEST_URL
     
 ## Contributing
 
@@ -252,5 +223,5 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
+See [Frontend Documentation](https://github.com/Lambda-School-Labs/voice-chatroom-fe/blob/master/README.md) for details on the fronend of our project.
+
